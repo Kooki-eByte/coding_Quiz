@@ -7,6 +7,16 @@ body {
   background-color: #efefef;
 }
 
+/* NavBar Section */
+#wholeNav p {
+}
+
+#timer {
+  color: white;
+  margin: 0;
+}
+
+/* Main Section */
 .container {
   text-align: center;
 }
