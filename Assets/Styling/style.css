@@ -5,16 +5,27 @@
 
 body {
   background-color: #efefef;
+  margin: 0;
+  padding: 0;
 }
 
 /* NavBar Section */
 #wholeNav p {
-}
-
-#timer {
-  color: white;
   margin: 0;
 }
+
+#viewHS {
+  color: rgba(0, 154, 192, 0.75);
+}
+
+#countdown {
+  color: rgba(0, 154, 192, 0.75);
+}
+
+/* #timer {
+  color: rgba(0, 204, 255, 0.75);
+  margin: 0;
+} */
 
 /* Main Section */
 .container {
@@ -40,4 +51,34 @@ div,
 
 #startBtn {
   color: rgba(0, 204, 255, 0.75);
+}
+/* Hide anything */
+.hide {
+  display: none;
+}
+
+/* Answer button set up */
+.ansBtn {
+  box-shadow: inset 0px 0px 0px 0px #e184f3;
+  background: linear-gradient(to bottom, #cf2bf0 5%, #73038a 100%);
+  background-color: #cf2bf0;
+  border-radius: 6px;
+  border: 1px solid #a511c0;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 3px 0px #9b14b3;
+}
+.ansBtn:hover {
+  background: linear-gradient(to bottom, #73038a 5%, #cf2bf0 100%);
+  background-color: #73038a;
+}
+.ansBtn:active {
+  position: relative;
+  top: 1px;
 }
