@@ -31,11 +31,15 @@ function timeStarter(event) {
   }, 1000);
 }
 
-// !
+// ! updateDisplay to show the game
+function updateDisplay(questionsObj) {
+  console.log(questionsObj.questions[0]);
+}
 
 function startGame() {
   timeStarter(event);
   // ? display the question and mutliple choice buttons function
+  updateDisplay(quizQandA);
 }
 
 // ! Have a event listener for the start game button
