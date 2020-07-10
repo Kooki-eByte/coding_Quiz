@@ -3,6 +3,8 @@ const startBtn = document.querySelector("#startBtn");
 const startScreen = document.querySelector(".show");
 const timerEl = document.querySelector("#countdown");
 const headerTag = document.querySelector("#startHead");
+const ansButtonDiv = document.querySelector(".answerbtns");
+const answerBtnArr = document.querySelectorAll("#ansBtnId");
 
 let scoreboard = [{ name: "Bob", highscore: 0 }];
 
@@ -47,15 +49,17 @@ function timeStarter(event) {
 }
 
 // * updateDisplay to show the game
-function updateDisplay(questions) {
-  headerTag.textContent = questions.question1.question;
+function updateDisplay({ question }) {
+  headerTag.textContent = question;
 }
 
 // * The start and end game functions
 function startGame() {
   timeStarter(event);
+  ansButtonDiv.classList.replace("hide", "show");
+
   // ? display the question and mutliple choice buttons function
-  updateDisplay(quizQandA);
+  updateDisplay(quizQandA.question1);
 }
 
 function endGame() {
@@ -67,6 +71,12 @@ startBtn.addEventListener("click", () => {
   startBtn.setAttribute("class", "hide");
   // ? start timer function
   startGame();
+});
+
+ansButtonDiv.addEventListener("click", (event) => {
+  // Get the value from the buttons
+  let value = event.target.value;
+  console.log(value);
 });
 
 // ? checking answer, going to next question, eventlistener for answer, and a function to update the display
