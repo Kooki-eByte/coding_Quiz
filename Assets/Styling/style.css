@@ -18,14 +18,13 @@ body {
   color: rgba(0, 154, 192, 0.75);
 }
 
-#countdown {
+#timerP {
   color: rgba(0, 154, 192, 0.75);
 }
 
-/* #timer {
-  color: rgba(0, 204, 255, 0.75);
-  margin: 0;
-} */
+#countdown {
+  color: rgba(0, 154, 192, 0.75);
+}
 
 /* Main Section */
 .container {
@@ -52,10 +51,6 @@ div,
 #startBtn {
   color: rgba(0, 204, 255, 0.75);
 }
-/* Hide anything */
-.hide {
-  display: none;
-}
 
 /* Answer button set up */
 .ansBtn {
@@ -81,4 +76,9 @@ div,
 .ansBtn:active {
   position: relative;
   top: 1px;
+}
+
+/* Hide anything */
+.hide {
+  display: none;
 }

@@ -17,11 +17,8 @@
       <a class="navbar-brand" id="viewHS" href="./Assets/highscore.html"
         >View Highscores</a
       >
-      <!-- Have timer -->
-      <!-- <p id="timer">
-        Time:
-      </p> -->
-      <p id="countdown"></p>
+
+      <p id="timerP">Time : <span id="countdown">0</span></p>
     </nav>
     <main class="container">
       <div class="row show">
@@ -40,8 +37,34 @@
             </p>
           </div>
         </div>
-
-        <button type="button" class="btn btn-dark show" id="startBtn">
+        <div id="answerbtns">
+          <button
+            type="button"
+            class="btn ansBtn hide"
+            id="ansBtnId"
+            value="1"
+          ></button>
+          <button
+            type="button"
+            class="btn ansBtn hide"
+            id="ansBtnId"
+            value="2"
+          ></button>
+          <button
+            type="button"
+            class="btn ansBtn hide"
+            id="ansBtnId"
+            value="3"
+          ></button>
+          <button
+            type="button"
+            class="btn ansBtn hide"
+            id="ansBtnId"
+            value="4"
+          ></button>
+        </div>
+        <br />
+        <button type="button" class="btn btn-dark" id="startBtn">
           Start Game
         </button>
       </div>
