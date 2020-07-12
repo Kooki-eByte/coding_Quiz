@@ -22,14 +22,12 @@
       <p id="timerP">Time : <span id="countdown">0</span></p>
     </nav>
     <main class="container">
-      <div class="row show">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
+      <div class="show">
+        <div>
           <h1 id="startHead">Coding Quiz Challenge</h1>
         </div>
-        <div class="col-lg-3"></div>
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-12 paraDiv">
             <p id="startPara">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quis
               repudiandae ipsum illum earum alias pariatur dolorum nulla rem
@@ -38,23 +36,22 @@
             </p>
           </div>
         </div>
-        <div class="hide answerbtns">
-          <button type="button" class="btn ansBtn" id="ansBtnId" value="1">
-            button 1
-          </button>
-          <button type="button" class="btn ansBtn" id="ansBtnId" value="2">
-            button 2
-          </button>
-          <button type="button" class="btn ansBtn" id="ansBtnId" value="3">
-            button 3
-          </button>
-          <button type="button" class="btn ansBtn" id="ansBtnId" value="4">
-            button 4
-          </button>
-        </div>
-        <br />
         <button type="button" class="btn btn-dark" id="startBtn">
           Start Game
+        </button>
+      </div>
+      <div class="hide answerbtns">
+        <button type="button" class="btn ansBtn" id="ansBtnId" value="A">
+          A
+        </button>
+        <button type="button" class="btn ansBtn" id="ansBtnId" value="B">
+          B
+        </button>
+        <button type="button" class="btn ansBtn" id="ansBtnId" value="C">
+          C
+        </button>
+        <button type="button" class="btn ansBtn" id="ansBtnId" value="D">
+          D
         </button>
       </div>
     </main>
