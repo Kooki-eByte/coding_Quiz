@@ -117,20 +117,24 @@ function displayHighscoreForm() {
   newSubmit.addEventListener("click", function (event) {
     event.preventDefault();
     let name = newInput.value.trim();
-    scoreboard.push(localStorage.setItem("name", JSON.stringify(name)));
-    scoreboard.push(
-      localStorage.setItem("highscore", JSON.stringify(highscore))
-    );
+    localStorage.setItem("name", JSON.stringify(name));
+    localStorage.setItem("highscore", JSON.stringify(highscore));
+    scoreboard.push({ name: name, highscore: highscore });
     console.log(scoreboard);
   });
 
   // * reset listener
+  resetBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    location.href = "./index.html";
+  });
 }
 
 //
 
 // * Have a event listener for the start game button
 startBtn.addEventListener("click", () => {
+  highscore = 0;
   startBtn.setAttribute("class", "hide");
   // ? start timer function
   startGame();
