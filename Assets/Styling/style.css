@@ -46,10 +46,15 @@ div,
   font-size: 18px;
   font-weight: bold;
   line-height: 20px;
+  white-space: pre-line;
 }
 
 #startBtn {
   color: rgba(0, 204, 255, 0.75);
+}
+
+.submit-reset-btn {
+  margin-top: 20px;
 }
 
 /* Answer button set up */
