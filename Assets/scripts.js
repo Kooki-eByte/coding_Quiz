@@ -37,7 +37,7 @@ const quizQandA = [
 
 // All global let vars
 let highscore = JSON.parse(localStorage.getItem("highscore"));
-let scoreboard = [{ name: "Bob", highscore: 0 }];
+let scoreboard = [{ name: "Bob", highscore: 500 }];
 let questionCounter = 0;
 let name = JSON.parse(localStorage.getItem("name"));
 
@@ -121,12 +121,15 @@ function displayHighscoreForm() {
     localStorage.setItem("highscore", JSON.stringify(highscore));
     scoreboard.push({ name: name, highscore: highscore });
     console.log(scoreboard);
+    location.href = "./assets/highscore.html";
   });
 
   // * reset listener
   resetBtn.addEventListener("click", function (event) {
     event.preventDefault();
     location.href = "./index.html";
+    console.log(highscore);
+    console.log(name);
   });
 }
 
