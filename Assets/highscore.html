@@ -15,15 +15,23 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
-
+    <link rel="stylesheet" href="./Styling/style.css" />
     <title>Coding Quiz</title>
   </head>
   <body>
-    <h1>Highscore page</h1>
-    <h2><a href="../index.html">Go back to quiz</a></h2>
+    <nav class="navbar navbar-dark bg-dark" id="wholeNav">
+      <a class="navbar-brand" id="viewHS" href="../index.html">Go Back </a>
+    </nav>
+    <main>
+      <div class="container">
+        <h1>Highscore page</h1>
+        <ul id="scoreboard-list"></ul>
+      </div>
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./scripts.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

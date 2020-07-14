@@ -6,6 +6,7 @@ const timerEl = document.querySelector("#countdown");
 const headerTag = document.querySelector("#startHead");
 const mutlipleChoiceAnswers = document.querySelector("#startPara");
 const displayForm = document.querySelector("#display-highscore-form");
+const scoreboardList = document.querySelector("ul");
 const ansButtonDiv = document.querySelector(".answerbtns");
 const paraDiv = document.querySelector(".paraDiv");
 const startScreen = document.querySelector(".show");
@@ -37,7 +38,7 @@ const quizQandA = [
 
 // All global let vars
 let highscore = JSON.parse(localStorage.getItem("highscore"));
-let scoreboard = [{ name: "Bob", highscore: 500 }];
+let scoreboard = JSON.parse(localStorage.getItem("scoreboard"));
 let questionCounter = 0;
 let name = JSON.parse(localStorage.getItem("name"));
 
@@ -120,8 +121,12 @@ function displayHighscoreForm() {
     localStorage.setItem("name", JSON.stringify(name));
     localStorage.setItem("highscore", JSON.stringify(highscore));
     scoreboard.push({ name: name, highscore: highscore });
-    console.log(scoreboard);
+    localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
+    // let storedNameArr = JSON.parse(localStorage.getItem("nameArr"));
+    // let storedScoreArr = JSON.parse(localStorage.getItem("scoreArr"));
     location.href = "./assets/highscore.html";
+    storeArrays();
+    renderScoreboard(name);
   });
 
   // * reset listener
@@ -163,4 +168,28 @@ ansButtonDiv.addEventListener("click", function (event) {
   }
 });
 
-// * listen for a click in the submit button so that when it is pressed it will grab the value of the name in the form and set the item
+// Highscore section page
+function storeArrays() {
+  //   localStorage.setItem("nameArr", JSON.stringify(nameArr));
+  //   localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+  console.log(nameArr);
+  console.log(scoreArr);
+}
+
+function renderScoreboard() {
+  // Clear todoList element and update todoCountSpan
+  scoredboardList.innerHTML = ""; // This allows the list to update if something got deleted
+
+  // Render a new li for each todo
+  for (let i = 0; i < scoreboard.length; i++) {
+    let nameLi = document.createElement("li");
+    nameLi.textContent = scoreboard[i].name + " : " + scoreboard[i].highscore;
+    nameLi.setAttribute("data-index"), i;
+
+    let button = document.createElement("button");
+    button.textContent = "Delete";
+
+    nameLi.appendChild(button);
+    scoreboardList.appendChild(nameLi);
+  }
+}
