@@ -157,8 +157,20 @@ function displayHighscoreForm() {
   // * submit listener
   newSubmit.addEventListener("click", function (event) {
     event.preventDefault();
-    let name = newInput.value.trim();
+    let userName = newInput.value.trim();
+    let scoreArray = {
+      name: userName,
+      score: highscore,
+    };
+    scoreboardArr.push(scoreArray);
+    scoreboardArr.sort(function (a, b) {
+      return b.score - a.score;
+    });
+    scoreboardArr.splice(10);
+
+    localStorage.setItem("scoreboard", JSON.stringify(scoreboardArr));
     console.log("displayHighscoreForm -> name", name);
+    renderScoreboard();
   });
 
   // * reset listener
@@ -212,19 +224,16 @@ function storeArrays() {
 }
 
 function renderScoreboard() {
+  scoreboard = JSON.parse(localStorage.getItem("scoreboard"));
   // Clear todoList element and update todoCountSpan
   // scoredboard.innerHTML = ""; // This allows the list to update if something got deleted
-  scoredboard.innerHTML = "";
+  scoreboard.innerHTML = "";
   // Render a new li for each todo
   for (let i = 0; i < scoreboard.length; i++) {
     let nameLi = document.createElement("li");
-    nameLi.textContent = scoreboard[i].name + " : " + scoreboard[i].highscore;
-    nameLi.setAttribute("data-index"), i;
+    nameLi.textContent = scoreboard[i].name + " : " + scoreboard[i].score;
+    nameLi.setAttribute("data-index", i);
 
-    let button = document.createElement("button");
-    button.textContent = "Delete";
-
-    nameLi.appendChild(button);
     scoreboardList.appendChild(nameLi);
   }
 }
