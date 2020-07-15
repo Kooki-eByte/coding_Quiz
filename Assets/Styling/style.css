@@ -57,6 +57,10 @@ div,
   margin-top: 20px;
 }
 
+ul {
+  list-style: none;
+}
+
 /* Answer button set up */
 .ansBtn {
   box-shadow: inset 0px 0px 0px 0px #e184f3;

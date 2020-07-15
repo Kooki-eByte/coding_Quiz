@@ -76,6 +76,7 @@ let questionCounter = 0;
 let name = JSON.parse(localStorage.getItem("name"));
 let scoreboardArr = [];
 isDone = false;
+isSubmitPressed = false;
 // function to start the timer and have it display on screen.. Count down from 60 seconds
 function timeStarter(event) {
   event.preventDefault();
@@ -157,26 +158,32 @@ function displayHighscoreForm() {
   // * submit listener
   newSubmit.addEventListener("click", function (event) {
     event.preventDefault();
-    let userName = newInput.value.trim();
-    let scoreArray = {
-      name: userName,
-      score: highscore,
-    };
-    scoreboardArr.push(scoreArray);
-    scoreboardArr.sort(function (a, b) {
-      return b.score - a.score;
-    });
-    scoreboardArr.splice(10);
+    if (!isSubmitPressed) {
+      isSubmitPressed = true;
+      let userName = newInput.value.trim();
+      let scoreArray = {
+        name: userName,
+        score: highscore,
+      };
+      scoreboardArr.push(scoreArray);
+      scoreboardArr.sort(function (a, b) {
+        return b.score - a.score;
+      });
+      scoreboardArr.splice(10);
 
-    localStorage.setItem("scoreboard", JSON.stringify(scoreboardArr));
-    console.log("displayHighscoreForm -> name", name);
-    renderScoreboard();
+      localStorage.setItem("scoreboard", JSON.stringify(scoreboardArr));
+      console.log("displayHighscoreForm -> name", name);
+      renderScoreboard();
+    } else {
+      return;
+    }
   });
 
   // * reset listener
   resetBtn.addEventListener("click", function (event) {
     event.preventDefault();
     isDone = false;
+    isSubmitPressed = false;
     location.href = "./index.html";
   });
 }
