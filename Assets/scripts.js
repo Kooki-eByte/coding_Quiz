@@ -6,6 +6,7 @@ const timerEl = document.querySelector("#countdown");
 const headerTag = document.querySelector("#startHead");
 const mutlipleChoiceAnswers = document.querySelector("#startPara");
 const displayForm = document.querySelector("#display-highscore-form");
+const viewHighScore = document.querySelector("#viewHS");
 const scoreboardList = document.querySelector("ul");
 const ansButtonDiv = document.querySelector(".answerbtns");
 const paraDiv = document.querySelector(".paraDiv");
@@ -14,25 +15,57 @@ const submitResetDiv = document.querySelector(".submit-reset-btn");
 
 const quizQandA = [
   {
-    question: "what does RGB stand for?",
+    question:
+      "1. What is the HTML tag under which one can write the JavaScript code?",
     choices:
-      "(A)Red, Green, Blue\r\n\r\n(B)Red, Green, Black\r\n\r\n(C)Rose, Gold, Brown\r\n\r\n(D)I dont even know lol",
-    answer: "A",
-  },
-  {
-    question: "Question 2?",
-    choices: "A. ans1\r\n\r\nB. ans2\r\n\r\nC. ans3\r\n\r\nD. ans4",
-    answer: "B",
-  },
-  {
-    question: "Question 3?",
-    choices: "A. ans1\r\n\r\nB. ans2\r\n\r\nC. ans3\r\n\r\nD. ans4",
+      "(A) <javascript>\r\n\r\n(B) <scripted>\r\n\r\n(C) <script>\r\n\r\n(D) <js>",
     answer: "C",
   },
   {
-    question: "Question 4?",
-    choices: "A. ans1\r\n\r\nB. ans2\r\n\r\nC. ans3\r\n\r\nD. ans4",
+    question:
+      "2. What is the correct syntax for referring to an external script called “geek.js”?",
+    choices:
+      "A. <script src=”geek.js”>\r\n\r\nB. <script href=”geek.js”>\r\n\r\nC. <script ref=”geek.js”>\r\n\r\nD.<script name=”geek.js”>",
+    answer: "A",
+  },
+  {
+    question:
+      "3. What is the syntax for creating a function in JavaScript named as Geekfunc?",
+    choices:
+      "A. function = Geekfunc()\r\n\r\nB. function Geekfunc()\r\n\r\nC. function := Geekfunc()\r\n\r\nD. function : Geekfunc()",
+    answer: "B",
+  },
+  {
+    question: "4. How is the function called in JavaScript?",
+    choices:
+      "A.  call Geekfunc();\r\n\r\nB. call function GeekFunc();\r\n\r\nC. Geekfunc();\r\n\r\nD. function Geekfunc();",
+    answer: "C",
+  },
+  {
+    question: "5. How is the function called in JavaScript?",
+    choices:
+      "A.  call Geekfunc();\r\n\r\nB. call function GeekFunc();\r\n\r\nC. Geekfunc();\r\n\r\nD. function Geekfunc();",
+    answer: "C",
+  },
+  {
+    question:
+      "6. How to write an ‘if’ statement for executing some code. If 'i' is NOT equal to 5?",
+    choices:
+      "A. if(i<>5)\r\n\r\nB. if i<>5\r\n\r\nC. if(i!=5)\r\n\r\nD. if i!=5",
+    answer: "C",
+  },
+  {
+    question: "7. How to initialize an array in JavaScript?",
+    choices:
+      "A.  var Geeks= ‘Geek1’, ‘Geek2’, ‘Geek3’\r\n\r\nB. var Geeks=(1:Geek1, 2:Geek2, 3:Geek3)\r\n\r\nC. var Geeks=(1=Geek1, 2=Geek2, 3=Geek3)\r\n\r\nD. var Geeks=[“Geek1”, “Geek2”, “Geek3”]",
     answer: "D",
+  },
+  {
+    question:
+      "8. What is the method in JavaScript used to remove the whitespace at the beginning and end of any string ?",
+    choices:
+      "A. strip()\r\n\r\nB. trim()\r\n\r\nC. stripped()\r\n\r\nD. trimmed()",
+    answer: "B",
   },
 ];
 
@@ -41,11 +74,12 @@ let highscore = JSON.parse(localStorage.getItem("highscore"));
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard"));
 let questionCounter = 0;
 let name = JSON.parse(localStorage.getItem("name"));
-
+let scoreboardArr = [];
+isDone = false;
 // function to start the timer and have it display on screen.. Count down from 60 seconds
 function timeStarter(event) {
   event.preventDefault();
-  let timeLeft = 10;
+  var timeLeft = 60;
   timerEl.textContent = timeLeft;
 
   let timeInterval = setInterval(() => {
@@ -56,7 +90,10 @@ function timeStarter(event) {
       timerEl.textContent = "0";
       console.log("Time is done");
       clearInterval(timeInterval);
-      endGame();
+      if (isDone === false) {
+        isDone = true;
+        endGame();
+      }
     }
   }, 1000);
 }
@@ -64,10 +101,13 @@ function timeStarter(event) {
 // * updateDisplay to show the questions and choices
 function updateDisplay(arr) {
   // Put question on the header
-  headerTag.textContent = arr[questionCounter].question;
-  mutlipleChoiceAnswers.textContent = arr[questionCounter].choices;
-
-  console.log("DONE!!");
+  if (questionCounter < arr.length) {
+    headerTag.textContent = arr[questionCounter].question;
+    mutlipleChoiceAnswers.textContent = arr[questionCounter].choices;
+  } else {
+    isDone = true;
+    endGame();
+  }
 }
 
 // * The start and end game functions
@@ -118,23 +158,14 @@ function displayHighscoreForm() {
   newSubmit.addEventListener("click", function (event) {
     event.preventDefault();
     let name = newInput.value.trim();
-    localStorage.setItem("name", JSON.stringify(name));
-    localStorage.setItem("highscore", JSON.stringify(highscore));
-    scoreboard.push({ name: name, highscore: highscore });
-    localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
-    // let storedNameArr = JSON.parse(localStorage.getItem("nameArr"));
-    // let storedScoreArr = JSON.parse(localStorage.getItem("scoreArr"));
-    location.href = "./assets/highscore.html";
-    storeArrays();
-    renderScoreboard(name);
+    console.log("displayHighscoreForm -> name", name);
   });
 
   // * reset listener
   resetBtn.addEventListener("click", function (event) {
     event.preventDefault();
+    isDone = false;
     location.href = "./index.html";
-    console.log(highscore);
-    console.log(name);
   });
 }
 
@@ -144,7 +175,11 @@ function displayHighscoreForm() {
 startBtn.addEventListener("click", () => {
   highscore = 0;
   startBtn.setAttribute("class", "hide");
-  // ? start timer function
+  // Have var assign to local storage
+  if (scoreboard !== null) {
+    scoreboardArr = scoreboard;
+  }
+  // start the game
   startGame();
 });
 
@@ -152,7 +187,7 @@ startBtn.addEventListener("click", () => {
 ansButtonDiv.addEventListener("click", function (event) {
   const selectedAnswer = event.target.value;
   const answerForQuestion = quizQandA[questionCounter].answer;
-  console.log(selectedAnswer);
+  //   console.log(selectedAnswer);
 
   if (selectedAnswer === answerForQuestion) {
     highscore += 5;
@@ -178,8 +213,8 @@ function storeArrays() {
 
 function renderScoreboard() {
   // Clear todoList element and update todoCountSpan
-  scoredboardList.innerHTML = ""; // This allows the list to update if something got deleted
-
+  // scoredboard.innerHTML = ""; // This allows the list to update if something got deleted
+  scoredboard.innerHTML = "";
   // Render a new li for each todo
   for (let i = 0; i < scoreboard.length; i++) {
     let nameLi = document.createElement("li");
