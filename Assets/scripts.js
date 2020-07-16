@@ -7,11 +7,13 @@ const headerTag = document.querySelector("#startHead");
 const mutlipleChoiceAnswers = document.querySelector("#startPara");
 const displayForm = document.querySelector("#display-highscore-form");
 const viewHighScore = document.querySelector("#viewHS");
+const navBarEl = document.querySelector("#wholeNav");
 const scoreboardList = document.querySelector("ul");
 const ansButtonDiv = document.querySelector(".answerbtns");
 const paraDiv = document.querySelector(".paraDiv");
 const startScreen = document.querySelector(".show");
 const submitResetDiv = document.querySelector(".submit-reset-btn");
+const scoreboardEl = document.querySelector("#scoreboard-list");
 
 const quizQandA = [
   {
@@ -116,13 +118,26 @@ function startGame() {
   timeStarter(event);
   ansButtonDiv.classList.replace("hide", "show");
   updateDisplay(quizQandA);
+  scoreboardIsOn();
+}
+
+function scoreboardIsOn() {
+  if (isSubmitPressed) {
+    for (let i = 0; i < 10; i++) {
+      scoreboardEl.removeChild(scoreboardEl.lastElementChild);
+    }
+  } else {
+    return;
+  }
 }
 
 function endGame() {
   headerTag.textContent = "Game Over";
   mutlipleChoiceAnswers.textContent = "Nice Job! you scored : " + highscore;
   ansButtonDiv.classList.replace("show", "hide");
+  navBarEl.classList.add("hide");
   isCorrect.textContent = "";
+  isSubmitPressed = false;
   displayHighscoreForm();
 }
 
@@ -184,6 +199,7 @@ function displayHighscoreForm() {
     event.preventDefault();
     isDone = false;
     isSubmitPressed = false;
+    navBarEl.classList.replace("hide", "show");
     location.href = "./index.html";
   });
 }
@@ -192,6 +208,7 @@ function displayHighscoreForm() {
 
 // * Have a event listener for the start game button
 startBtn.addEventListener("click", () => {
+  isSubmitPressed = true;
   highscore = 0;
   startBtn.setAttribute("class", "hide");
   // Have var assign to local storage
@@ -234,13 +251,22 @@ function renderScoreboard() {
   scoreboard = JSON.parse(localStorage.getItem("scoreboard"));
   // Clear todoList element and update todoCountSpan
   // scoredboard.innerHTML = ""; // This allows the list to update if something got deleted
-  scoreboard.innerHTML = "";
+  scoreboardEl.innerHTML = "";
   // Render a new li for each todo
   for (let i = 0; i < scoreboard.length; i++) {
     let nameLi = document.createElement("li");
     nameLi.textContent = scoreboard[i].name + " : " + scoreboard[i].score;
     nameLi.setAttribute("data-index", i);
+    nameLi.setAttribute("id", "list");
 
     scoreboardList.appendChild(nameLi);
   }
 }
+
+viewHighScore.addEventListener("click", function (event) {
+  event.preventDefault();
+  if (!isSubmitPressed) {
+    isSubmitPressed = true;
+    renderScoreboard();
+  }
+});
